@@ -1,6 +1,5 @@
 // SysTickPWM.c
 // Runs on TM4C123
-// By Kevin Martinez
 // Feb 2023
 // Use SysTick interrupts to implement a timer-based PWM: this PWM signal can be used 
 // to control the brightness of an LED
