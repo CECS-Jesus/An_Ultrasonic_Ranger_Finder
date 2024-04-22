@@ -7,11 +7,11 @@
 #include <stdint.h>
 #include "tm4c123gh6pm.h"
 
-#define PERIOD_W 					400000 					// num of machine cycles for 10ms, value is based on 40MHz system clock
-#define PERIOD_R 					20000000				// 2hz red period
-#define HALF_DUTY   			PERIOD_W/2 			// 50% duty cycle
+#define PERIOD_W 					400000 			// num of machine cycles for 10ms, value is based on 40MHz system clock
+#define PERIOD_R 					20000000		// 2hz red period
+#define HALF_DUTY   					PERIOD_W/2 		// 50% duty cycle
 #define DUTY_STEP					PERIOD_W/10 		// duty cycle change for each button press
-#define RED								0x02
+#define RED						0x02
 #define WHITE 						0x0E
 
 // Global variables: 
@@ -21,11 +21,11 @@ volatile unsigned long H,L,global_dist;
 
 void SysTick_Init(void){
 	H = L = HALF_DUTY;            			// 50% duty cycle, @ system clock 40MHz, 
-  NVIC_ST_CTRL_R = 0;           			// disable SysTick during setup
-  NVIC_ST_RELOAD_R = HALF_DUTY-1;     // reload value for 50% duty cycle
-  NVIC_ST_CURRENT_R = 0;        			// any write to current clears it
-  NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x1FFFFFFF)|0x40000000; // bit 31-29 for SysTick, set priority to 2
-  NVIC_ST_CTRL_R |= NVIC_ST_CTRL_CLK_SRC + NVIC_ST_CTRL_INTEN + NVIC_ST_CTRL_ENABLE;  // enable with core clock and interrupts, start systick timer
+	NVIC_ST_CTRL_R = 0;           			// disable SysTick during setup
+	NVIC_ST_RELOAD_R = HALF_DUTY-1;     // reload value for 50% duty cycle
+	NVIC_ST_CURRENT_R = 0;        			// any write to current clears it
+	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x1FFFFFFF)|0x40000000; // bit 31-29 for SysTick, set priority to 2
+	NVIC_ST_CTRL_R |= NVIC_ST_CTRL_CLK_SRC + NVIC_ST_CTRL_INTEN + NVIC_ST_CTRL_ENABLE;  // enable with core clock and interrupts, start systick timer
 }
 
 // SysTick ISR:
