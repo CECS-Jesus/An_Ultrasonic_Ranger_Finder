@@ -10,9 +10,9 @@
 #define ONE_MICRO_SECOND          16     // number of machine cycles to generate 1us delay for 16MHz system clock
 
 void SysTick_Start(void){
-  NVIC_ST_CTRL_R = 0;
-  NVIC_ST_RELOAD_R = NVIC_ST_RELOAD_M; // number of counts to wait
-  NVIC_ST_CURRENT_R = 0; // any value written to CURRENT clears   
+	NVIC_ST_CTRL_R = 0;
+	NVIC_ST_RELOAD_R = NVIC_ST_RELOAD_M; // number of counts to wait
+	NVIC_ST_CURRENT_R = 0; // any value written to CURRENT clears   
 	NVIC_ST_CTRL_R |= NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC; // enable SysTick with core clock
 }
 
@@ -29,10 +29,10 @@ uint32_t SysTick_Get_MC_Elapsed(void){
 // Time delay using busy wait.
 // This function assumes 16 MHz system clock.
 void SysTick_Wait1us(uint8_t delay){
-  NVIC_ST_CTRL_R = 0;
-  NVIC_ST_RELOAD_R = delay*ONE_MICRO_SECOND-1; // number of counts to wait
-  NVIC_ST_CURRENT_R = 0; // any value written to CURRENT clears
+	NVIC_ST_CTRL_R = 0;
+	NVIC_ST_RELOAD_R = delay*ONE_MICRO_SECOND-1; // number of counts to wait
+	NVIC_ST_CURRENT_R = 0; // any value written to CURRENT clears
 	NVIC_ST_CTRL_R |= NVIC_ST_CTRL_ENABLE+NVIC_ST_CTRL_CLK_SRC;
-  while((NVIC_ST_CTRL_R&NVIC_ST_CTRL_COUNT)==0); // wait for count flag
-  NVIC_ST_CTRL_R = 0;
+	while((NVIC_ST_CTRL_R&NVIC_ST_CTRL_COUNT)==0); // wait for count flag
+	NVIC_ST_CTRL_R = 0;
 }
